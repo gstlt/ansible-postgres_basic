@@ -1,0 +1,4 @@
+---
+
+- name: postgresql_basic | Ensure the PostgreSQL service is running
+  service: name=postgresql state=started enabled=yes

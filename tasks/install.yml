@@ -1,0 +1,11 @@
+---
+
+- name: postgresql_basic | Ensure apt cache is up to date
+  apt: update_cache=yes
+
+- name: postgresql_basic | Ensure packages are installed
+  apt: name={{item}}
+  with_items:
+    - postgresql
+    - libpq-dev
+    - python-psycopg2

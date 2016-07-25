@@ -1,0 +1,22 @@
+---
+
+- name: postgresql_basic | Ensure database is created
+  postgresql_db:
+    name: "{{postgresql_dbname}}"
+  # lc_collate: 'en_US.UTF-8'
+  # lc_ctype: 'en_US.UTF-8'
+  # become: yes
+  # become_user: postgres
+  # become_method: sudo
+
+- name: postgresql_basic | Ensure user has access to database
+  postgresql_user: db={{postgresql_dbname}} name={{postgresql_dbuser}} password={{postgresql_dbpassword}} priv=ALL
+  # become: yes
+  # become_user: postgres
+  # become_method: sudo
+
+- name: postgresql_basic | Ensure user does not have unnecessary privilege
+  postgresql_user: name={{postgresql_dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+  # become: yes
+  # become_user: postgres
+  # become_method: sudo

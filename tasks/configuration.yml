@@ -1,0 +1,28 @@
+---
+
+- name: postgresql_basic | PostgreSQL to listen on all interfaces
+  lineinfile:
+    dest: /etc/postgresql/9.5/main/postgresql.conf
+    regexp: '^#?listen_addresses\s*='
+    line: "listen_addresses = '127.0.0.1'"
+    state: present
+  notify: restart postgresql
+
+- name: postgresql_basic | Make sure we allow connect on 127.0.0.1/32
+  lineinfile:
+      dest: /etc/postgresql/9.5/main/pg_hba.conf
+      regexp: 'host\s+all\s+all\s+127.0.0.1/32\s+md5'
+      line: 'host all all 127.0.0.1/32 trust'
+      insertbefore: BOF
+  notify: reload postgresql
+
+- name: postgresql_basic | Make sure we allow connect on localhost
+  lineinfile:
+      dest: /etc/postgresql/9.5/main/pg_hba.conf
+      regexp: 'local\s+all\s+all\s+md5'
+      line: 'local  all  all    trust'
+      insertbefore: BOF
+  notify: reload postgresql
+
+# make sure DB is restarted at this point
+- meta: flush_handlers

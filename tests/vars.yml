@@ -1,0 +1,6 @@
+---
+
+postgresql_dbname: foo
+postgresql_dbuser: foo
+postgresql_dbpassword: feefafo
+softline_password: qwerty123456
