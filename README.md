@@ -10,11 +10,13 @@ WARNING: This doesn't deal with character encoding, you need to take care of thi
 
 This has been tested on Ansible 1.9.4 and higher.
 
-To install:
+To install, invoke in your role folder:
 
 ```
-git clone 
+git clone https://github.com/gstlt/ansible-postgres_basic.git postgres_basic
 ```
+
+Role name will be 'postgres_basic'.
 
 #### Variables
 
